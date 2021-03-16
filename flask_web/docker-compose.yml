@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    command: python flask_web/app.py runserver 0.0.0.0:5000 
+    volumes:
+      - .:/code
+    ports:
+      - "5000:5000"
+    depends_on: 
+      - db
+  db:
+    image: sqlalchemy/postgres
+    POSTGRES_HOST: postgres
