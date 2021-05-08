@@ -1,10 +1,10 @@
 {% extends "layout.html" %}
 {% block content %}
 <div class="content-section">
-    <form method="POST" action="">
+    <form method="POST" action="" enctype="multipart/form-data">
         {{ form.hidden_tag() }}
         <fieldset class="form-group">
-            <legend class="border-bottom mb-4">New post</legend>
+            <legend class="border-bottom mb-4">{{ legend }}</legend>
             <div class="form-group">
                 {{ form.title.label(class="form-control-label") }}
                 {% if form.title.errors %}
@@ -31,9 +31,18 @@
                     {{ form.content(class="form-control form-control-lg") }}
                 {% endif %}
             </div>
-            <label for="formFileDisabled" class="form-label">Choose a photo to upload (optional)</label>
-            <input class="form-control" type="file" id="formFileDisabled" />
-            
+            <div class="form-group">
+                {{ form.upload_picture.label() }}
+                {{ form.upload_picture(class="form-control-file") }}
+                {% if form.upload_picture.errors %}
+                    {% for error in form.upload_picture.errors %}
+                        <span class="test-danger">{{ error }}</span></br>
+                    {% endfor %}
+                {% endif %}
+            </div> 
+            <!-- <label for="formFileDisabled" class="form-label">Choose a photo to upload (optional)</label>
+            <input class="form-control" type="file" id="formFileDisabled" /> -->
+            <!-- <img class="rounded-circle" src="{{ upload_file }}"> -->
         </fieldset>
         <div class="form-group">
             {{ form.submit(class="btn btn-outline-info") }}
